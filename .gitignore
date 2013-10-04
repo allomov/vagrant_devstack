@@ -2,3 +2,5 @@ etc/vagrant.yaml
 etc/localrc
 .vagrant
 cache/*
+*.vdi
+*.mdkv

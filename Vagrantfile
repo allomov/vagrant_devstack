@@ -41,7 +41,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--memory", memory]
 
     n_cpus = conf['num_cpus']
-    v.customize ["modifyvm", :id, "--cpus", n_cpus.to_s()] if ! n_cpus.nil?
+    v.customize ["modifyvm", :id, "--cpus", n_cpus.to_s()] unless n_cpus.nil?
+    
+    volume_storage_file_size, volume_storage_file = *conf.values_at('volume_storage_file_size', 'volume_storage_file')
+    unless volume_storage_file_size.nil? && volume_storage_file.nil?
+      format = 'vdi' # possible values: VDI|VMDK|VHD
+      v.customize ['createhd', '--filename', volume_storage_file, '--size', volume_storage_file_size, '--format', format]
+      v.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', "#{volume_storage_file}.#{format}"]
+    end    
   end
 
   suffix = "100"
@@ -61,6 +68,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder(ssh_dir, "/home/vagrant/.host-ssh", id: "v-ssh", create: true)
 
   cookbooks_dir = conf['devstack_cookbooks_dir']
+
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ["cookbooks"]
     chef.log_level = :debug
