@@ -1,2 +1,4 @@
 sudo pvcreate /dev/sdb
-sudo vgcreate stack-volumes /dev/sdb
+sudo vgreduce stack-volumes /dev/loop0
+sudo vgextend stack-volumes /dev/sdb
+

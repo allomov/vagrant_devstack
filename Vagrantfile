@@ -3,7 +3,7 @@
 conf = {
     'ip_prefix' => '192.168.27',
     'mac_prefix' => '080027027',
-    'box_name' => 'precise',
+    'box_name' => 'devstack-cloudfoundry',
     'box_url' => 'http://files.vagrantup.com/precise64.box',
     'allocate_memory' => 1024,
     'cache_dir' => 'cache/',
