@@ -1,4 +1,4 @@
-source etc/localrc
+. "./etc/localrc" # load password and etc.
 
 export OS_USERNAME=admin
 export OS_PASSWORD=$ADMIN_PASSWORD

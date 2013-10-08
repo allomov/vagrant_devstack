@@ -7,3 +7,13 @@ FLAT_INTERFACE=eth1
 PUBLIC_INTERFACE=eth1
 HOST_IP=192.168.27.100
 FLOATING_RANGE=192.168.27.128/28
+
+disable_service n-net
+enable_service q-svc
+enable_service q-agt
+enable_service q-dhcp
+enable_service q-l3
+enable_service q-meta
+enable_service neutron
+# Optional, to enable tempest configuration as part of devstack
+enable_service tempest
