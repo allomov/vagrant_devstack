@@ -4,3 +4,6 @@ etc/localrc
 cache/*
 *.vdi
 *.mdkv
+.ruby-version
+.ruby-gemset
+.rvmrc
