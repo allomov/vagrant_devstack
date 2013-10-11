@@ -33,6 +33,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = conf['box_name']
   config.vm.box_url = conf['box_url']
+  config.vm.network "forwarded_port", guest: 80, host: 8080
 
   config.vm.provider :virtualbox do |v|
     v.name = conf['box_name']
