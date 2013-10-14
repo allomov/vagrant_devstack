@@ -1,9 +1,12 @@
 box_name: precise
-allocate_memory: 1024
-num_cpus: 2
+allocate_memory: 8192
+num_cpus: 4
 
 ip_prefix: 192.168.27
 mac_prefix: 080027027
+
+volume_storage_file_size: 102400
+volume_storage_file: volume_storage
 
 # These paths are all relative to the Vagrantfile
 cache_dir: cache/

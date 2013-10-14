@@ -3,8 +3,10 @@ SERVICE_TOKEN=secrete
 ADMIN_PASSWORD=secrete
 SERVICE_TOKEN=secrete
 
-FLAT_INTERFACE=eth1
-PUBLIC_INTERFACE=eth1
+EXTRA_OPTS=(scheduler_default_filters=AllHostsFilter)
+
+FLAT_INTERFACE=virbr0
+PUBLIC_INTERFACE=eth0
 HOST_IP=192.168.27.100
 FLOATING_RANGE=192.168.27.128/28
 
@@ -17,3 +19,13 @@ enable_service q-meta
 enable_service neutron
 # Optional, to enable tempest configuration as part of devstack
 enable_service tempest
+
+
+# Use stable release Grizzly
+# CINDER_BRANCH=stable/grizzly
+# GLANCE_BRANCH=stable/grizzly
+# HORIZON_BRANCH=stable/grizzly
+# KEYSTONE_BRANCH=stable/grizzly
+# NOVA_BRANCH=stable/grizzly
+# NEUTRON_BRANCH=stable/grizzly
+# SWIFT_BRANCH=stable/grizzly
