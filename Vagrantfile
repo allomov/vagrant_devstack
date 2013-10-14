@@ -44,6 +44,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     n_cpus = conf['num_cpus']
     v.customize ["modifyvm", :id, "--cpus", n_cpus.to_s()] unless n_cpus.nil?
     
+    v.customize ["modifyvm", :id, "--nicpromisc3", "allow-all"]
+
     volume_storage_file_size, volume_storage_file = *conf.values_at('volume_storage_file_size', 'volume_storage_file')
     unless volume_storage_file_size.nil? && volume_storage_file.nil?
       format = 'vdi' # possible values: VDI|VMDK|VHD
@@ -60,7 +62,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   mac_prefix = conf['mac_prefix']
   mac = "#{mac_prefix}#{suffix}"
 
+  
   config.vm.network :private_network, ip: ip, mac: mac
+
+  # eth2, this will be the OpenStack "public" network, use DevStack default
+  config.vm.network :private_network, ip: "172.24.4.225", :netmask => "255.255.255.224", :auto_config => false
 
   cache_dir = conf['cache_dir']
   config.vm.synced_folder(cache_dir, "/home/vagrant/cache", id: "v-cache", create: true, nfs: true)
